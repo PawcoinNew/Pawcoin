@@ -1,0 +1,6 @@
+usr/local/bin/pawcoin-qt usr/bin
+share/pixmaps/pawcoin32.xpm usr/share/pixmaps
+share/pixmaps/pawcoin16.xpm usr/share/pixmaps
+share/pixmaps/pawcoin128.png usr/share/pixmaps
+debian/pawcoin-qt.desktop usr/share/applications
+debian/pawcoin-qt.protocol usr/share/kde4/services/

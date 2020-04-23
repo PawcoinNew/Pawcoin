@@ -1,0 +1,157 @@
+
+## <summary>policy for pawcoin</summary>
+
+
+########################################
+## <summary>
+##	Transition to pawcoin.
+## </summary>
+## <param name="domain">
+## <summary>
+##	Domain allowed to transition.
+## </summary>
+## </param>
+#
+interface(`pawcoin_domtrans',`
+	gen_require(`
+		type pawcoin_t, pawcoin_exec_t;
+	')
+
+	corecmd_search_bin($1)
+	domtrans_pattern($1, pawcoin_exec_t, pawcoin_t)
+')
+
+
+########################################
+## <summary>
+##	Execute pawcoin server in the pawcoin domain.
+## </summary>
+## <param name="domain">
+##	<summary>
+##	Domain allowed access.
+##	</summary>
+## </param>
+#
+interface(`pawcoin_initrc_domtrans',`
+	gen_require(`
+		type pawcoin_initrc_exec_t;
+	')
+
+	init_labeled_script_domtrans($1, pawcoin_initrc_exec_t)
+')
+
+
+########################################
+## <summary>
+##	Search pawcoin lib directories.
+## </summary>
+## <param name="domain">
+##	<summary>
+##	Domain allowed access.
+##	</summary>
+## </param>
+#
+interface(`pawcoin_search_lib',`
+	gen_require(`
+		type pawcoin_var_lib_t;
+	')
+
+	allow $1 pawcoin_var_lib_t:dir search_dir_perms;
+	files_search_var_lib($1)
+')
+
+########################################
+## <summary>
+##	Read pawcoin lib files.
+## </summary>
+## <param name="domain">
+##	<summary>
+##	Domain allowed access.
+##	</summary>
+## </param>
+#
+interface(`pawcoin_read_lib_files',`
+	gen_require(`
+		type pawcoin_var_lib_t;
+	')
+
+	files_search_var_lib($1)
+	read_files_pattern($1, pawcoin_var_lib_t, pawcoin_var_lib_t)
+')
+
+########################################
+## <summary>
+##	Manage pawcoin lib files.
+## </summary>
+## <param name="domain">
+##	<summary>
+##	Domain allowed access.
+##	</summary>
+## </param>
+#
+interface(`pawcoin_manage_lib_files',`
+	gen_require(`
+		type pawcoin_var_lib_t;
+	')
+
+	files_search_var_lib($1)
+	manage_files_pattern($1, pawcoin_var_lib_t, pawcoin_var_lib_t)
+')
+
+########################################
+## <summary>
+##	Manage pawcoin lib directories.
+## </summary>
+## <param name="domain">
+##	<summary>
+##	Domain allowed access.
+##	</summary>
+## </param>
+#
+interface(`pawcoin_manage_lib_dirs',`
+	gen_require(`
+		type pawcoin_var_lib_t;
+	')
+
+	files_search_var_lib($1)
+	manage_dirs_pattern($1, pawcoin_var_lib_t, pawcoin_var_lib_t)
+')
+
+
+########################################
+## <summary>
+##	All of the rules required to administrate
+##	a pawcoin environment
+## </summary>
+## <param name="domain">
+##	<summary>
+##	Domain allowed access.
+##	</summary>
+## </param>
+## <param name="role">
+##	<summary>
+##	Role allowed access.
+##	</summary>
+## </param>
+## <rolecap/>
+#
+interface(`pawcoin_admin',`
+	gen_require(`
+		type pawcoin_t;
+		type pawcoin_initrc_exec_t;
+		type pawcoin_var_lib_t;
+	')
+
+	allow $1 pawcoin_t:process { ptrace signal_perms };
+	ps_process_pattern($1, pawcoin_t)
+
+	pawcoin_initrc_domtrans($1)
+	domain_system_change_exemption($1)
+	role_transition $2 pawcoin_initrc_exec_t system_r;
+	allow $2 system_r;
+
+	files_search_var_lib($1)
+	admin_pattern($1, pawcoin_var_lib_t)
+
+')
+

@@ -1,0 +1,13 @@
+[Desktop Entry]
+Version=1.0
+Name=PWC Core
+Comment=PWC P2P Cryptocurrency
+Comment[fr]=PWC, monnaie virtuelle cryptographique pair à pair
+Comment[tr]=PWC, eşten eşe kriptografik sanal para birimi
+Exec=pawcoin-qt %u
+Terminal=false
+Type=Application
+Icon=pawcoin128
+MimeType=x-scheme-handler/pawcoin;
+Categories=Office;Finance;
+StartupWMClass=Pawcoin-qt

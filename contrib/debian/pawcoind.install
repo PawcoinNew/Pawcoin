@@ -1,0 +1,3 @@
+usr/local/bin/pawcoind usr/bin
+usr/local/bin/pawcoin-cli usr/bin
+debian/examples/pawcoin.conf etc/pawcoin

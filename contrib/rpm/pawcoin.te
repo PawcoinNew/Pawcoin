@@ -1,0 +1,81 @@
+policy_module(pawcoin, 1.100.1)
+
+########################################
+#
+# Declarations
+#
+
+type pawcoin_t;
+type pawcoin_exec_t;
+init_daemon_domain(pawcoin_t, pawcoin_exec_t)
+
+permissive pawcoin_t;
+
+type pawcoin_initrc_exec_t;
+init_script_file(pawcoin_initrc_exec_t)
+
+type pawcoin_conf_t;
+files_type(pawcoin_conf_t)
+
+type pawcoin_var_lib_t;
+files_type(pawcoin_var_lib_t)
+
+type pawcoin_var_run_t;
+files_type(pawcoin_var_run_t)
+
+type pawcoin_port_t;
+corenet_port(pawcoin_port_t)
+
+########################################
+#
+# pawcoin local policy
+#
+allow pawcoin_t self:process { fork };
+
+allow pawcoin_t self:fifo_file rw_fifo_file_perms;
+allow pawcoin_t self:unix_stream_socket create_stream_socket_perms;
+
+manage_dirs_pattern(pawcoin_t, pawcoin_conf_t, pawcoin_conf_t)
+manage_files_pattern(pawcoin_t, pawcoin_conf_t, pawcoin_conf_t)
+
+manage_dirs_pattern(pawcoin_t, pawcoin_var_lib_t, pawcoin_var_lib_t)
+manage_files_pattern(pawcoin_t, pawcoin_var_lib_t, pawcoin_var_lib_t)
+files_var_lib_filetrans(pawcoin_t, pawcoin_var_lib_t, { dir file })
+
+manage_dirs_pattern(pawcoin_t, pawcoin_var_run_t, pawcoin_var_run_t)
+manage_files_pattern(pawcoin_t, pawcoin_var_run_t, pawcoin_var_run_t)
+
+sysnet_dns_name_resolve(pawcoin_t)
+corenet_all_recvfrom_unlabeled(pawcoin_t)
+
+allow pawcoin_t self:tcp_socket create_stream_socket_perms;
+corenet_tcp_sendrecv_generic_if(pawcoin_t)
+corenet_tcp_sendrecv_generic_node(pawcoin_t)
+corenet_tcp_sendrecv_all_ports(pawcoin_t)
+corenet_tcp_bind_generic_node(pawcoin_t)
+
+gen_require(`
+    type pawcoin_port_t;
+')
+allow pawcoin_t pawcoin_port_t:tcp_socket name_bind;
+
+gen_require(`
+    type pawcoin_port_t;
+')
+allow pawcoin_t pawcoin_port_t:tcp_socket name_connect;
+
+domain_use_interactive_fds(pawcoin_t)
+
+files_read_etc_files(pawcoin_t)
+
+miscfiles_read_localization(pawcoin_t)
+
+sysnet_dns_name_resolve(pawcoin_t)
+
+allow pawcoin_t pawcoin_exec_t:file execute_no_trans;
+allow pawcoin_t self:process setsched;
+corecmd_exec_ls(pawcoin_t)
+corenet_tcp_connect_http_port(pawcoin_t)
+dev_read_urand(pawcoin_t)
+fs_getattr_xattr_fs(pawcoin_t)
+kernel_read_system_state(pawcoin_t)
