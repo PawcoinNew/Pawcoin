@@ -1,5 +1,5 @@
 [![Discord Chat](https://img.shields.io/discord/473618220524240928.svg?style=flat&logo=Discord)](https://discord.gg/RfJjU2w) 
-[![Twitter Follow](https://img.shields.io/twitter/follow/altbetofficial.svg?style=social)](https://altbet.io/go/twitter) 
+[![Twitter Follow](https://img.shields.io/twitter/follow/altbetofficial.svg?style=social)](https://twitter.com/paw_coin?lang=es) 
 
 About PWC cryptocurrency
 =====
