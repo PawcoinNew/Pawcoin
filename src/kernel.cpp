@@ -13,6 +13,7 @@
 #include "stakeinput.h"
 #include "utilmoneystr.h"
 #include "zpivchain.h"
+#include "main.h"
 
 using namespace std;
 
@@ -280,7 +281,30 @@ bool GetKernelStakeModifier(uint256 hashBlockFrom, uint64_t& nStakeModifier, int
     nStakeModifier = pindex->nStakeModifier;
     return true;
 }
+bool HasStakeMinDepth(int contextHeight, int utxoFromBlockHeight)
+{
+    const int minHistoryRequired = Params().MinStakeHistory();
+    return (contextHeight - utxoFromBlockHeight >= minHistoryRequired);
+}
 
+int GetLastHeight(uint256 txHash)
+{
+    uint256 hashBlock;
+    CTransaction stakeInput;
+    if (!GetTransaction(txHash, stakeInput, hashBlock, true))
+        return 0;
+
+    if (hashBlock == uint256())
+        return 0;
+
+    return mapBlockIndex[hashBlock]->nHeight;
+}
+
+bool AreHardenedChecksEnabled()
+{
+    const int nHeight = chainActive.Height();
+    return nHeight >= Params().HardenedStakeHeight();
+}
 bool CheckStakeKernelHash(const CBlockIndex* pindexPrev, const unsigned int nBits, CStakeInput* stake, const unsigned int nTimeTx, uint256& hashProofOfStake, const bool fVerify)
 {
     // Calculate the proof of stake hash
@@ -291,6 +315,23 @@ bool CheckStakeKernelHash(const CBlockIndex* pindexPrev, const unsigned int nBit
     const CAmount& nValueIn = stake->GetValue();
     const CDataStream& ssUniqueID = stake->GetUniqueness();
 
+//! enforce minimum stake amount
+    if (AreHardenedChecksEnabled())
+    {
+       const CAmount minStakeAmount = Params().MinStakeAmount();
+       if (nValueIn < minStakeAmount)
+           return error("%s : min stake amount not met (found %llu, minimum %llu)", __func__, nValueIn, minStakeAmount);
+
+       const int nPreviousBlockHeight = pindexPrev->nHeight;
+       const int nBlockFromHeight = stake->GetIndexFrom()->nHeight;
+
+       if (nBlockFromHeight == 0)
+           return false;
+
+       if (!HasStakeMinDepth(nPreviousBlockHeight+1, nBlockFromHeight))
+           return error("CheckProofOfStake() : min stake depth not met");
+    }
+    
     // Base target
     uint256 bnTarget;
     bnTarget.SetCompact(nBits);

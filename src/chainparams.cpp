@@ -163,7 +163,9 @@ public:
         // Fake Serial Attack
         nFakeSerialBlockheightEnd = NEVER;
         nSupplyBeforeFakeSerial = 0 * COIN;
-
+        nHardenedStakeHeight = 55000;
+        nMinStakeAmount = 10 * COIN;
+        nMinStakeHistory = 120;
         const char* pszTimestamp = "help dogs is mandatory";
         CMutableTransaction txNew;
         txNew.vin.resize(1);
