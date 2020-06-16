@@ -36,8 +36,8 @@ About PWC cryptocurrency
 <a name="pos-block-rewards"></a>
 ## PoS Block Rewards
 
-| Subsidy | Block                   | Reward | Reward Split   | Note          |
-|---------|-----------------        |--------|----------------|---------------|
+| Subsidy | Block                   | Reward | Reward Split        |
+|---------|-----------------        |--------|---------------------|
 | SWAP    | 501-50.000              | 1.15 PWC  | 75% MN / 25% POS | 
 | Phase 1 | 50.001-10.000           | 1.25 PWC  | 75% MN / 25% POS | 
 | Phase 2 | 100.001-200.000         | 1.75 PWC  | 75% MN / 25% POS | 
