@@ -682,12 +682,13 @@ bool CMasternodeBroadcast::VerifySignature()
 }
 
 std::string CMasternodeBroadcast::GetStrMessage()
-return (addr.ToString() +
+{	return (addr.ToString() +
             std::to_string(sigTime) +
             pubKeyCollateralAddress.GetID().ToString() +
             pubKeyMasternode.GetID().ToString() +
             std::to_string(protocolVersion)
     );
+}
 
 CMasternodePing::CMasternodePing()
 {
