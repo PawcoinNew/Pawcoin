@@ -6733,14 +6733,14 @@ bool static ProcessMessage(CNode* pfrom, std::string strCommand, CDataStream& vR
 
 
     else if (strCommand == "reject") {
-     string strMsg;
+     std::string strMsg;
          unsigned char ccode;
-         string strReason;
+         std::string strReason;
  
          try {
              vRecv >> LIMITED_STRING(strMsg, CMessageHeader::COMMAND_SIZE) >> ccode >> LIMITED_STRING(strReason, MAX_REJECT_MESSAGE_LENGTH);
  
-             ostringstream ss;
+             std::ostringstream ss;
              ss << strMsg << " code " << itostr(ccode) << ": " << strReason;
  
              if (strMsg == "block" || strMsg == "tx") {
