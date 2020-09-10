@@ -290,6 +290,7 @@ bool HasStakeMinDepth(int contextHeight, int utxoFromBlockHeight)
 
 int GetLastHeight(uint256 txHash)
 {
+    LOCK(cs_main);
     uint256 hashBlock;
     CTransaction stakeInput;
     if (!GetTransaction(txHash, stakeInput, hashBlock, true))
