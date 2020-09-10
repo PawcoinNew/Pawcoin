@@ -283,6 +283,7 @@ bool GetKernelStakeModifier(uint256 hashBlockFrom, uint64_t& nStakeModifier, int
 }
 bool HasStakeMinDepth(int contextHeight, int utxoFromBlockHeight)
 {
+    LOCK(cs_main);
     const int minHistoryRequired = Params().MinStakeHistory();
     return (contextHeight - utxoFromBlockHeight >= minHistoryRequired);
 }
@@ -302,6 +303,7 @@ int GetLastHeight(uint256 txHash)
 
 bool AreHardenedChecksEnabled()
 {
+    LOCK(cs_main);
     const int nHeight = chainActive.Height();
     return nHeight >= Params().HardenedStakeHeight();
 }
