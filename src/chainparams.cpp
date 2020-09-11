@@ -164,7 +164,7 @@ public:
         nFakeSerialBlockheightEnd = NEVER;
         nSupplyBeforeFakeSerial = 0 * COIN;
         nHardenedStakeHeight = 55000;
-        nMinStakeAmount = 10 * COIN;
+        nMinStakeAmount = 1 * COIN;
         nMinStakeHistory = 120;
         const char* pszTimestamp = "help dogs is mandatory";
         CMutableTransaction txNew;
