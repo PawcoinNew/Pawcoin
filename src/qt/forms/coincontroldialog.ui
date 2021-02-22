@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>954</width>
+    <width>1035</width>
     <height>500</height>
    </rect>
   </property>
@@ -353,6 +353,48 @@
          <number>14</number>
         </property>
         <item>
+         <widget class="QRadioButton" name="radioTreeMode">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Maximum" vsizetype="Fixed">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="text">
+           <string>Tree mode</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+           <widget class="QRadioButton" name="radioListMode">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Maximum" vsizetype="Fixed">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="text">
+            <string>List mode</string>
+          </property>
+          <property name="checked">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QCheckBox" name="advanced">
+          <property name="minimumSize">
+           <size>
+            <width>70</width>
+            <height>17</height>
+           </size>
+          </property>
+          <property name="text">
+           <string>advanced</string>
+          </property>
+         </widget>
+        </item>
+        <item>
          <widget class="QPushButton" name="pushButtonSelectAll">
           <property name="sizePolicy">
            <sizepolicy hsizetype="Maximum" vsizetype="Fixed">
@@ -377,39 +419,10 @@
            </sizepolicy>
           </property>
           <property name="text">
-           <string>toggle lock state</string>
+           <string>toggle lock status</string>
           </property>
           <property name="autoDefault">
            <bool>false</bool>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QRadioButton" name="radioTreeMode">
-          <property name="sizePolicy">
-           <sizepolicy hsizetype="Maximum" vsizetype="Fixed">
-            <horstretch>0</horstretch>
-            <verstretch>0</verstretch>
-           </sizepolicy>
-          </property>
-          <property name="text">
-           <string>Tree mode</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QRadioButton" name="radioListMode">
-          <property name="sizePolicy">
-           <sizepolicy hsizetype="Maximum" vsizetype="Fixed">
-            <horstretch>0</horstretch>
-            <verstretch>0</verstretch>
-           </sizepolicy>
-          </property>
-          <property name="text">
-           <string>List mode</string>
-          </property>
-          <property name="checked">
-           <bool>true</bool>
           </property>
          </widget>
         </item>
@@ -439,6 +452,99 @@
     </widget>
    </item>
    <item>
+    <layout class="QHBoxLayout" name="horizontalLayout_3">
+     <item>
+      <widget class="QPushButton" name="select_50">
+       <property name="minimumSize">
+        <size>
+         <width>115</width>
+         <height>23</height>
+        </size>
+       </property>
+       <property name="text">
+        <string>50</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="select_100">
+       <property name="minimumSize">
+        <size>
+         <width>115</width>
+         <height>23</height>
+        </size>
+       </property>
+       <property name="text">
+        <string>100</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="select_625">
+       <property name="minimumSize">
+        <size>
+         <width>114</width>
+         <height>23</height>
+        </size>
+       </property>
+       <property name="text">
+        <string>625</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <spacer name="horizontalSpacer_2">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>40</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item>
+      <widget class="QPushButton" name="GreaterThan">
+       <property name="text">
+        <string>Greater Than</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="LessThan">
+       <property name="text">
+        <string>Less Than</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="EqualTo">
+       <property name="text">
+        <string>Equal to</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QDoubleSpinBox" name="num_box">
+       <property name="minimumSize">
+        <size>
+         <width>96</width>
+         <height>20</height>
+        </size>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+   <item>
+    <layout class="QVBoxLayout" name="verticalLayout_2"/>
+   </item>
+   <item>
+    <layout class="QHBoxLayout" name="horizontalLayout_2"/>
+   </item>
+   <item>
     <widget class="CoinControlTreeWidget" name="treeWidget">
      <property name="contextMenuPolicy">
       <enum>Qt::CustomContextMenu</enum>
@@ -447,7 +553,7 @@
       <bool>false</bool>
      </property>
      <property name="columnCount">
-      <number>10</number>
+      <number>13</number>
      </property>
      <attribute name="headerShowSortIndicator" stdset="0">
       <bool>true</bool>
@@ -477,7 +583,7 @@
      </column>
      <column>
       <property name="text">
-       <string>Type</string>
+	<string>Type</string>
       </property>
      </column>
      <column>
@@ -496,6 +602,21 @@
      <column>
       <property name="text">
        <string>Priority</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string/>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string/>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string/>
       </property>
      </column>
      <column>
