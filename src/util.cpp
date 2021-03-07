@@ -498,9 +498,19 @@ void ReadConfigFile(std::map<std::string, std::string>& mapSettingsRet,
         // Create empty pawcoin.conf if it does not exist
         FILE* configFile = fopen(GetConfigFile().string().c_str(), "a");
         if (configFile != NULL)
-            fclose(configFile);
-        return; // Nothing to read, so just return
-    }
+            {
+            std::string strHeader =
+                "# Pawcoin Configuration File!\n"
+                "addnode=5.189.166.55:55556\n"
+                "addnode=212.24.105.38:55556\n"
+                "addnode=173.249.1.71:55556\n"
+                "addnode=161.97.101.101:55556\n";
+			fwrite(strHeader.c_str(), std::strlen(strHeader.c_str()), 1, configFile);
+			fclose(configFile);
+			streamConfig.open(GetConfigFile());
+		}
+		//return; // Nothing to read, so just return
+	}
 
     std::set<std::string> setOptions;
     setOptions.insert("*");
