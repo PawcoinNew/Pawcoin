@@ -1,5 +1,10 @@
 [![Discord Chat](https://img.shields.io/discord/473618220524240928.svg?style=flat&logo=Discord)](https://discord.gg/RfJjU2w) 
 
+# In Development - New Team DigitalCoinBRL Ativos Digitais
+## The DigitalCoinBRL development team is pleased to announce that it is taking over the development and maintenance of the PWC project from this date, being registered in a commit of changes in theGithub. We will work to keep the project active and so that the community does not suffer from the closure of another large project, with the help and partnership of the SPERO team. 
+New information will be made available on our channels and forum. 
+https://talk.sperocoin.org
+
 About PWC cryptocurrency
 =====
 <p>Pawcoin is an experimental digital currency that enables instant payments to anyone, anywhere in the world. Pawcoin uses peer-to-peer technology to operate with no central authority: managing transactions and issuing money are carried out collectively by the network. Pawcoin Core is the name of open source software which enables the use of this currency.</p>
